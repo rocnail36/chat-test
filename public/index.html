@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+    <input type="text" id="input" >
+    </form>
+   
+    <ul id="list">
+
+    </ul>
+    
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  var socket = io();
+
+  const form = document.querySelector("#form")
+  const list = document.querySelector("#list")
+  const input = document.querySelector("#input")
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    socket.emit("message-to-server", input.value)
+  })
+
+
+  socket.on("message-to-client", (data) => {
+    list.innerHTML += `<li>${data}</li>`
+  })
+
+
+
+</script>
+</body>
+
+
+
+
+</html>
